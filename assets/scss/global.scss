@@ -1,0 +1,723 @@
+$color-primary: #f40002;
+$color-secondary: #202023;
+$color-third: #d32019;
+$header-height: 80px;// nav height
+
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin animate($time) {
+    transition: all $time ease-in-out;
+}
+@keyframes loading {
+    0%, 100% {transform: translate(-50%, -50%) rotate(-0deg);}
+    50% {transform: translate(-50%, -50%) rotate(360deg);}
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat";
+}
+body {
+    background-color: $color-third;
+    min-height: 1000px;
+    padding-top: $header-height;
+}
+.loading {
+    width: 500px;
+    height: 500px;
+    background-color: transparent;
+    position: fixed;
+    border: 20px solid deepskyblue;
+    border-radius: 50%;
+    border-top-color: transparent;
+    top: 50%;
+    left: 50%;
+    animation: loading 4s infinite;
+    z-index: 100;
+}
+.loading-bg {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.418);
+    z-index: 99;
+}
+.alert {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    font-size: 0;
+    font-weight: 1000;
+    @include animate(0.5s);
+    text-align: center;
+    cursor: pointer;
+}
+.alert.error {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 10vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 0, 0, 0.705);
+    border: 5px solid red;
+    z-index: 10;
+    font-size: 30px;
+}
+.alert.success {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 10vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 128, 0, 0.63);
+    border: 5px solid green;
+    z-index: 10;
+    font-size: 30px;
+}
+.alert b {
+    color: white;
+}
+div.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $color-primary;
+    height: $header-height;
+    width: 100vw;
+    box-sizing: border-box;
+    color: white;
+    padding: 0 0 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    .title {
+        background-color: $color-secondary;
+        color: white;
+        text-decoration: none;
+        font-weight: normal;
+        height: $header-height - 10;
+        padding: 0 5px;
+        border-radius: 20px;
+        font-weight: 700;
+        .line-troughed {
+            text-decoration: line-through;
+        }
+    }
+    .menu-bar {
+        width: 45vw;
+        max-width: 400px;
+        min-width: 90px;
+        height: $header-height;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        user-select: none;
+        .link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            min-width: 90px;
+            width: 100%;
+            height: 100%;
+            @include flexCenter();
+            @include animate(0.3s);
+            &:hover {
+                background-color: lighten($color-primary, 8);
+                color: $color-secondary;
+            }
+        }
+    }
+}
+.content {
+    padding: 20px 20px 0 20px;
+}
+.products {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    .acts {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+        .btn {
+            @include flexCenter();
+            @include animate(0.5s);
+            margin: 0 20px;
+            background-color: $color-secondary;
+            padding: 10px;
+            border-radius: 10px;
+            border: 3px solid $color-primary;
+            font-size: 20px;
+            font-weight: 1000;
+            width: 300px;
+            cursor: pointer;
+            color: black;
+            text-decoration: none;
+            .bx {
+                font-size: 30px;
+                margin: 0 5px;
+                color: $color-primary;
+            }
+            &:hover {
+                border-color: lighten($color-primary, 20);
+                background-color: lighten($color-secondary, 10);
+            }
+        }
+    }
+    .page-nav {
+        width: 90vw;
+        height: 40px;
+        margin: 5px auto;
+        line-height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .btn {
+            @include animate(0.5s);
+            box-sizing: border-box;
+            background-color: $color-primary;
+            border-radius: 0 10px 10px 0;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            color: $color-secondary;
+            font-size: 40px;
+            line-height: 40px;
+            &:first-child {
+                border-radius: 10px 0 0 10px;
+            }
+        }
+        .go-to-page {
+            @include animate(0.5s);
+            box-sizing: border-box;
+            background-color: $color-primary;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            color: $color-secondary;
+            font-size: 25px;
+        }
+        .current-page {
+            @include animate(0.5s);
+            box-sizing: border-box;
+            background-color: $color-secondary;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            color: $color-primary;
+            font-size: 25px;
+        }
+    }
+    .cards {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: 30px 0;
+    }
+}
+.card-product {
+    $card-color: darken($color-third, 10);
+    width: 90%;
+    height: 150px;
+    background-color: $card-color;
+    display: flex;
+    flex-direction: row;
+    margin: 3px auto;
+    .img-con {
+        background-color: darken($card-color, 10);
+        width: 10%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        img {
+            width: 70%;
+        }
+    }
+    .info {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .name {
+            font-weight: 600;
+            font-size: 25px;
+            color: black;
+            text-decoration: none;
+        }
+        .price-info {
+            display: flex;
+            justify-content: space-between;
+            p {
+                font-size: 16pt;
+            }
+        }
+    }
+}
+.card-cart {
+    $card-color: darken($color-third, 10);
+    width: 100%;
+    background-color: $card-color;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    .img-con {
+        background-color: darken($card-color, 10);
+        min-width: 150px;
+        min-height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        img {
+            height: 150px;
+            width: 150px;
+        }
+    }
+    .info {
+        padding: 20px;
+        height: 40%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .name {
+            font-weight: 600;
+            font-size: 25px;
+            color: black;
+            text-decoration: none;
+        }
+        h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            button {
+                border: none;
+                width: 40px;
+                height: 40px;
+                font-size: 30px;
+                background-color: $color-primary;
+                color: $color-secondary;
+                border-radius: 5px;
+                &:hover {
+                    background-color: darken($color-primary, 10);
+                }
+                &:active {
+                    background-color: $color-secondary;
+                    color: $color-primary;
+                }
+            }
+        }
+        .acts {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            button {
+                padding: 10px 30px;
+                box-sizing: border-box;
+            }
+        }
+    }
+}
+.create-form {
+    background-color: lighten($color-third, 10);
+    padding: 20px;
+    border-radius: 40px;
+    margin: 10px auto;
+    box-sizing: border-box;
+    display: flex;
+    width: 90vw;
+    text-align: center;
+    justify-content: center;
+    font-size: 20px;
+    input {
+        width: 88vw;
+        height: 40px;
+        margin: 20px 0;
+        border-radius: 10vh;
+        padding: 0 20px;
+        box-sizing: border-box;
+        font-size: 20px;
+        background-color: white;
+        border: 2px solid $color-primary;
+        outline: none;
+        &[type="number"] {
+            width: 95%;
+            margin: 20px 0 20px 0px;
+            border-radius: 0 10vh 10vh 0;
+        }
+        &[type="file"] {
+            padding-left: 0;
+        }
+        &[type="file"]::-webkit-file-upload-button {
+            background-color: lighten($color-primary, 20);
+            border-radius: 30px 0 0 30px;
+            border: none;
+            margin: 0 10px 0 0;
+            height: 100%;
+        }
+    }
+    .btn {
+        width: 80vw;
+        height: 40px;
+        margin: 20px 0;
+        border-radius: 10vh;
+        padding: 0 20px;
+        box-sizing: border-box;
+        font-size: 20px;
+        background-color: white;
+        outline: none;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        text-decoration: none;
+        line-height: 40px;
+    }
+    select {
+        width: 100%;
+        height: 40px;
+        margin: 20px 0;
+        border-radius: 10vh;
+        padding: 0 20px;
+        box-sizing: border-box;
+        font-size: 20px;
+        background-color: white;
+        border: 2px solid $color-primary;
+        outline: none;
+    }
+    .btn {
+        width: 100%;
+        height: 40px;
+        margin: 20px 0;
+        border-radius: 10vh;
+        padding: 0 20px;
+        box-sizing: border-box;
+        font-size: 20px;
+        background-color: $color-primary;
+        border: 2px solid $color-primary;
+        color: white;
+        outline: none;
+    }
+    p {
+        font-size: 30px;
+    }
+    textarea {
+        width: 100%;
+        height: 200px;
+        margin: 20px 0;
+        border-radius: 30px;
+        padding: 3px 20px;
+        box-sizing: border-box;
+        font-size: 20px;
+        background-color: white;
+        border: 3px solid $color-primary;
+        outline: none;
+    }
+}
+.detail {
+    @include flexCenter();
+    .container {
+        display: flex;
+        background-color: white;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 60vw;
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 20px;
+        gap: 20px;
+        .img-container {
+            @include flexCenter();
+            width: 100%;
+            justify-content: flex-start;
+            gap: 30px;
+            img {
+                width: 20%;
+            }
+            .name {
+                font-size: 40px;
+            }
+        }
+        .info {
+            width: 100%;
+            height: 100%;
+            font-size: 40px;
+            .description {
+                font-size: 20px;
+            }
+            h5 {
+                display: inline-block;
+                margin: 0 40px;
+                font-size: 50px;
+                line-height: 100%;
+            }
+            .btn i {
+                font-size: 50px;
+                line-height: 100%;
+                transform: rotate(-180deg);
+                color: black;
+            }
+            .btns {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                button  {
+                    width: 100%;
+                    height: 40px;
+                    font-size: 30px;
+                    border: none;
+                    border-radius: 50px;
+                    color: white;
+                    background-color: deepskyblue;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 20px 0;
+                    text-decoration: none;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: darken(deepskyblue, 10);
+                    }
+                    &:active {
+                        background-color: skyblue;
+                        color: gray;
+                    }
+                }
+            }
+        }
+    }
+}
+.category-form {
+    @include flexCenter();
+    input {
+        width: 80vw;
+        height: 6vh;
+        font-size: 2.3rem;
+        padding: 5px 30px;
+        box-sizing: border-box;
+        text-align: center;
+        border-radius: 50px 0 0 50px;
+        border: 4px solid black;
+        background-color: $color-primary;
+        color: $color-secondary;
+        &::placeholder {
+            color: darken($color-secondary, 20);
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    button {
+        border: 4px solid black;
+        width: 10vw;
+        height: 6vh;
+        font-size: 2.3rem;
+        padding: 0 30px;
+        box-sizing: border-box;
+        border-radius: 0 50px 50px 0;
+        background-color: $color-primary;
+        color: $color-secondary;
+    }
+}
+.home {
+    h1 {
+        font-size: 90px;
+        text-shadow: 0 10px 40px $color-primary;
+        text-align: center;
+        .color {
+            color: $color-primary;
+            .underline {
+                text-decoration: underline;
+                text-decoration-color: $color-secondary;
+            }
+        }
+        .color2 {
+            color: darken($color-secondary, 5);
+        }
+        .underline {
+            text-decoration: underline;
+            text-decoration-color: $color-secondary;
+        }
+    }
+    h2 {
+        text-align: center;
+        ul {
+            margin: 0 auto;
+            list-style-type: none;
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 40vw;
+            li {
+                margin: 10px;
+                background-color: $color-primary;
+                color: $color-secondary;
+                letter-spacing: 2px;
+                padding: 10px;
+                border-radius: 20px;
+            }
+        }
+    }
+    .title {
+        width: 100%;
+        margin: 10px 0 100px 0;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        .right {
+            position: relative;
+            h1 {
+                font-size: 40px;
+                text-shadow: none;
+                background-color: $color-primary;
+                padding: 20px;
+                color: $color-secondary;
+                margin: 50px auto;
+            }
+            p {
+                font-size: 20px;
+                text-shadow: none;
+                background-color: $color-secondary;
+                padding: 20px;
+                color: $color-primary;
+                margin: 50px auto;
+                box-sizing: border-box;
+                font-weight: 800;
+            }
+        }
+    }
+}
+.login {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+    width: 600px;
+    margin: 50px auto;
+    h1 {
+        font-size: 4.4em;
+        text-align: center;
+        background-color: darken(whitesmoke, 5);
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+    input {
+        background-color: darken(whitesmoke, 7);
+        border: none;
+        height: 50px;
+        width: 100%;
+        border-radius: 10px;
+        margin: 10px 0;
+        text-align: center;
+        font-size: 1.5em;
+    }
+    button {
+        background-color: deepskyblue;
+        border: none;
+        height: 50px;
+        width: 100%;
+        border-radius: 10px;
+        margin: 10px 0;
+        text-align: center;
+        font-size: 1.5em;
+    }
+}
+.footer {
+    background-color: $color-secondary;
+    height: 50vh;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 50px;
+    padding: 30px 10px;
+}
+.cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .products {
+        width: 100%;
+        display: flex;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .total {
+        width: 100%;
+        height: 100%;
+        background-color: darken($color-third, 10);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+
+        .btn {
+            margin: 5px auto;
+            width: 90%;
+            height: 40px;
+            background-color: $color-primary;
+            border: none;
+            border-radius: 20px;
+        }
+        .products {
+            max-height: 700px;
+            overflow-y: auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            div {
+                border: 1px solid darken($color-third, 15);
+                border-width: 2px 0 2px 0;
+                &:first-child {
+                    border-width: 4px 0 2px 0;
+                }
+                &:last-child {
+                    border-width: 2px 0 4px 0;
+                }
+            }
+        }
+        .info {
+            margin: 10px 5px 10px 5px;
+            padding: 20px 30px;
+            box-sizing: border-box;
+            background-color: $color-primary;
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            .total {
+                width: 100%;
+                background-color: inherit;
+                color: white;
+                margin: 0;
+            }
+            .btn {
+                margin: 3px;
+                width: 100%;
+                height: 40px;
+                background-color: $color-secondary;
+                border: none;
+                border-radius: 20px;
+            }
+        }
+    }
+}
